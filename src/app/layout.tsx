@@ -1,21 +1,21 @@
+"use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.scss";
 import Script from "next/script";
 import Providers from "./providers/providers";
+import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "WebApp telegram template",
-  description: "WebApp Telegram template for new projects",
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  
   return (
     <html lang="ru">
       <head>
@@ -31,10 +31,20 @@ export default function RootLayout({
         <meta name="robots" content="noindex,nofollow"/>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
       </head>
-      <body className={inter.className}>
-        <Providers>
-          {children}
-        </Providers>
+      <body className={clsx("bg-gradient-to-tr from-orange-800 to-orange-600 text-white p-2", inter.className, {
+        "h-full w-full overflow-hidden": pathname === '/hidden'
+      })}>
+        {pathname === "/hidden" ? (
+          <div className="overflow-y-scroll h-screen">
+            <Providers>
+              {children}
+            </Providers>
+          </div>
+        ) : (
+          <Providers>
+            {children}
+          </Providers>
+        )}
       </body>
     </html>
   );

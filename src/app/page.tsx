@@ -2,22 +2,19 @@
 
 import { useContext } from "react";
 import { webAppContext } from "./context";
+import Link from "next/link";
 
 export default function Home() {
   const app = useContext(webAppContext);
   
   return (
     <>
-    {app.version ? (
       <div className="h-full w-full text-center pt-4">
-        <code className="">{app.colorScheme}</code>
-        <h3 className="font-bold mb-1 text-xl">Welcome {app.initDataUnsafe.user?.first_name}!</h3>
-        <div className="font-medium text-sm text-center">I&apos;m Mini App for Telegram</div>
-        <a className="mt-6 block text-lg text-cyan-500 font-bold" href="https://t.me/thismisterit">My Telegram Channel</a>
+        <div className="flex flex-col gap-3 text-[14px] text-left">
+          <Link href="/hidden" className="underline">Hidden Dynamic Island ( отсутствует островок безопаности )</Link>
+          <Link href="/nothidden" className="underline">Dynamic Island Enabled ( присутствует островок безопасности )</Link>
+        </div>
       </div>
-      ) : (
-        "loading"
-      )}
     </>
   );
 }

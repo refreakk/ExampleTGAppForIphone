@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { TelegramWebApps } from 'telegram-webapps-types-new';
 
 /**
  * Hook to get the initial data from the Telegram Web Apps API already parsed.
@@ -9,7 +8,7 @@ import { TelegramWebApps } from 'telegram-webapps-types-new';
  * console.log({ hash });
  */
 function useTelegramInitData() {
-    const [data, setData] = useState<TelegramWebApps.WebAppInitData>({});
+    const [data, setData] = useState<any>({});
 
     useEffect(() => {
         const firstLayerInitData = Object.fromEntries(
